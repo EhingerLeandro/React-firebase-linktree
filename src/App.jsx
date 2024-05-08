@@ -19,8 +19,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div>{import.meta.env.VITE_APP_SALUDO}</div>
       <div className="card">
+      <div>{import.meta.env.VITE_APP_SALUDO}</div>
         <Link to="/login">
           <button>
             Login View

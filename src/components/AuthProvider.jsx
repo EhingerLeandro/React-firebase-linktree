@@ -6,6 +6,7 @@ import { registerNewUser } from "../firebase/firebase";
 import { getUserInfo } from "../firebase/firebase";
 
 export const AuthProvider = ({children, onUserLoggedIn, onUserNotLoggedIn, onUserNotRegistered}) => {
+    //This section works at the begin when the web is uploaded.
     useEffect(()=>{
         /*In this next part the method onAuth... uses a function that
          has been created (handleUser...), which also works with 
@@ -14,15 +15,14 @@ export const AuthProvider = ({children, onUserLoggedIn, onUserNotLoggedIn, onUse
         onAuthStateChanged(auth, async(user)=>{
             if(user){
                 const isRegistered = await userExists(user.uid);
-                console.log(isRegistered)
                 if(isRegistered){
                     const userInfo = await getUserInfo(user.uid);
                     if(userInfo.processCompleted){
+                        console.log(user)
                         onUserLoggedIn(userInfo);
                     }else{
                         onUserNotRegistered(userInfo);
                     }
-                    console.log(user)
                     
                 }else{
                     console.log(user);

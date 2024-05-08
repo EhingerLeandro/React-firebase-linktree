@@ -24,7 +24,6 @@ export const storage = getStorage(app);
 export async function userExists (uid){
   const docRef = doc(db, "users", uid);
   const res= await getDoc(docRef);
-  console.log(res);
   return res.exists();
 }
 
@@ -70,5 +69,54 @@ export async function getUserInfo(uidParam){
     return document.data();
   }catch(error){
     console.log(error);
+  }
+}
+
+export async function insertNewLink (link){
+  try{
+    const docsRef = collection(db, "links");
+    const res = await addDoc(docsRef, link);
+    return res;
+  }catch(error){
+    console.error(error);
+  }
+}
+
+export async function getLinks(uid){
+  let links=[];
+  try{
+    const collectionRef= collection(db, "links");
+    const q = query(collectionRef, where("uid", "==", uid))
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc)=>{
+      const link = {...doc.data()};
+      link.docId = doc.id;
+      links.push(link);
+    });
+    return links;
+
+  }catch(error){
+    console.error(error);
+  }
+} 
+
+export async function updateLink(docId, link){
+  try{
+    const docRef = doc(db, "links", docId);
+    const res = await setDoc(docRef, link);
+    return res;
+  }catch(error){
+    console.error(error);
+  }
+}
+
+export async function deleteLink(docId){
+  try{
+    const docRef = doc(db, "links", docId);
+    const res = deleteDoc(docRef);
+    return res
+  }catch(error){
+    console.error(error);
   }
 }
