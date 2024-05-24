@@ -54,10 +54,10 @@ const ChooseUserView = () =>{
     if(currentState === 3 || currentState===5){
         return(
             <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                <h2>Bienvenido {currentUser.displayName}</h2>
-                <div>Estas logueado pero no registrado. Tu cuenta google: &apos;{currentUser.displayName}&apos;</div>
-                <p>Para terminar el proceso, escoge un nombre de usuario</p>
-                {currentState===5? <p style={{color:"red"}}>El nombre de usuario ya existe, escoge otro</p>:""}
+                <h2>Welcome {currentUser.displayName}</h2>
+                <div>You are Logged in, but you aren't registered.</div>
+                <p>To finish, please write your username.</p>
+                {currentState===5? <p style={{color:"red"}}>This username already exists, please choose another:</p>:""}
                 <div style={{marginBottom:"10px"}}>
                     <input type="text" onInput={handleInputUsername}/>
                 </div>
@@ -71,8 +71,8 @@ const ChooseUserView = () =>{
     if(currentState===6){
         return(
             <div className="containContinue">
-                <h2>Felicidades ya puedes crear tus links</h2>
-                <Link to="/dashboard"><button className="buttons">Continuar</button></Link>
+                <h2>Congratulations now you can create your links</h2>
+                <Link to="/dashboard"><button className="buttons">Continue</button></Link>
             </div>
         )
     }
@@ -81,7 +81,7 @@ const ChooseUserView = () =>{
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleOnUserNotLoggedIn}
         onUserNotRegistered={handleOnUserNotRegistered}>
-            <div>Loading...</div>
+            <h2 style={{textAlign:"center"}}> Loading...</h2>
         </AuthProvider>)
 }
 export default ChooseUserView;
