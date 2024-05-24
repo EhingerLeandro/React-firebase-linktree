@@ -83,7 +83,7 @@ function DashboardView (){
     if(currentState===2){
         return(
             <DashboardWrapper>
-                <h3 style={{margin:"20px 0px 5px 5px" }}>Dashboard: {currentUser.username}</h3> 
+                <div className="title">Dashboard: {currentUser.username}</div> 
                 <form className="form" onSubmit={handleOnSubmit}>
                     <label className="labelInput" htmlFor="title">Title</label>
                     <input className="labelInput fullWidth" type="text" name="title" onChange={handleOnchange}/>

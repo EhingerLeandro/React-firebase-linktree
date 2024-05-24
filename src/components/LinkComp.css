@@ -3,17 +3,8 @@
     margin:5px 0px 10px 0px;
     border-radius:5px;
     padding:5px;
-    max-width:40vw;
+    max-width:75vw;
 }
-
-.buttons {
-    border-radius:5px;
-    color:#fff;
-    background-color: #6968be;
-    border:none;
-  }
-
-
 
   .labelInput{
     margin:5px 5px;

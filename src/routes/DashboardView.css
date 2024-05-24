@@ -2,6 +2,7 @@
     border-radius:5px;
     color:#fff;
     background-color: #6968be;
+    border:none;
   }
 
 .labelInput{
@@ -15,4 +16,11 @@
 .form{
   display:flex;
   flex-direction:column;
+  margin-bottom:5px;
+}
+
+.title{
+  margin:15px 0px 10px 0px ;
+  font-size:25px;
+  font-weight:bolder;
 }
