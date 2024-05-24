@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {auth} from "../firebase/firebase";
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth"
+import { onAuthStateChanged } from "firebase/auth"
 import { userExists } from "../firebase/firebase";
 import { registerNewUser } from "../firebase/firebase";
 import { getUserInfo } from "../firebase/firebase";
@@ -13,12 +13,13 @@ export const AuthProvider = ({children, onUserLoggedIn, onUserNotLoggedIn, onUse
          a parameter called "user", this parameter somehow takes all 
          the information from onAuth*/
         onAuthStateChanged(auth, async(user)=>{
+            console.log(user);
             if(user){
                 const isRegistered = await userExists(user.uid);
                 if(isRegistered){
                     const userInfo = await getUserInfo(user.uid);
                     if(userInfo.processCompleted){
-                        console.log(user)
+                        console.log(userInfo)
                         onUserLoggedIn(userInfo);
                     }else{
                         onUserNotRegistered(userInfo);

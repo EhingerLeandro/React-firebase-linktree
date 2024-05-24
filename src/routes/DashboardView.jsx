@@ -1,11 +1,12 @@
 import {AuthProvider} from "../components/AuthProvider";
-import {useNavigate, Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {DashboardWrapper} from "../components/DashboardWraper";
 import {v4 as uuidv4} from "uuid";
 import { insertNewLink } from "../firebase/firebase";
 import {getLinks, updateLink, deleteLink} from "../firebase/firebase";
 import { LinkComp } from "../components/LinkComp";
+import "../routes/DashboardView.css";
 
 function DashboardView (){
     const navigate = useNavigate()
@@ -27,6 +28,7 @@ function DashboardView (){
     function handleOnUserNotRegistered(){
         navigate("/login");
     }
+    console.log("dashboard");
 
     const addLink = () =>{
         if(currentTitle!==""&& currentUrl!==""){
@@ -40,12 +42,14 @@ function DashboardView (){
             newLink.docId = res.id;
             setCurrentTitle("");
             setCurrentUrl("");
+            setList([...list, newLink]);
         }
     }
-    console.log(list);
     
     function handleOnSubmit(e){
         e.preventDefault();
+        e.target["title"].value = "";
+        e.target["url"].value = "";
         addLink();
     }
 
@@ -55,7 +59,11 @@ function DashboardView (){
             setCurrentTitle(value);
         }
         if(e.target.name === "url"){
+            if (!/^https?:\/\//i.test(value)) {
+                setCurrentUrl(`https://${value}`);
+        }else{
             setCurrentUrl(value);
+        }
         }
     }
 
@@ -75,17 +83,17 @@ function DashboardView (){
     if(currentState===2){
         return(
             <DashboardWrapper>
-                <h2>Dahsboard: {currentUser.username}</h2>
-                <form onSubmit={handleOnSubmit}>
-                    <label htmlFor="title">Title</label>
-                    <input type="text" name="title" onChange={handleOnchange}/>
-                    <label>Url</label>
-                    <input type="text" name="url" onChange={handleOnchange}/>
-                    <input id="submit" type="submit" value="Create New Link"/>
+                <h3 style={{margin:"20px 0px 5px 5px" }}>Dashboard: {currentUser.username}</h3> 
+                <form className="form" onSubmit={handleOnSubmit}>
+                    <label className="labelInput" htmlFor="title">Title</label>
+                    <input className="labelInput fullWidth" type="text" name="title" onChange={handleOnchange}/>
+                    <label className="labelInput">Url</label>
+                    <input className="labelInput fullWidth" type="text" name="url" onChange={handleOnchange}/>
+                    <input className="labelInput buttons fullWidth" style={{color:"#fff"}} id="submit" type="submit" value="Create New Link"/>
                 </form>
                 <div>
                     {list.map((item)=>(
-                        <LinkComp 
+                        <LinkComp  
                         key={item.docId} 
                         docId={item.docId} 
                         title={item.title} 
@@ -103,7 +111,7 @@ function DashboardView (){
         <AuthProvider  onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleOnUserNotLoggedIn}
         onUserNotRegistered={handleOnUserNotRegistered}>
-            Loading...
+            <h2 style={{textAlign:"center"}}> Loading...</h2>
         </AuthProvider>
     )
 }

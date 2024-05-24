@@ -1,9 +1,11 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import {auth} from "../firebase/firebase";
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 // import { userExists } from "../firebase/firebase";
 import {useNavigate} from "react-router-dom";
 import {AuthProvider} from "../components/AuthProvider.jsx";
+import google_icon from "../images/google_icon.png";
+import style from "../routes/loginView.module.css";
 
 function LoginView (){
     const navigate = useNavigate();
@@ -24,20 +26,23 @@ function LoginView (){
         signInWithGoogle(googleProvider)
     }
     
-    function handleUserLoggedIn(user){
+    function handleUserLoggedIn(){
         navigate("/dashboard");
     }
-    function handleOnUserNotLoggedIn(user){
+    function handleOnUserNotLoggedIn(){
         setCurrentState(4);
     }
     function handleOnUserNotRegistered(){
         navigate("/choose-username");
     }
 
+    console.log("loginView");
+
     if(currentState === 4){
         return(
-            <div>
-                <button onClick={handleClick}>Login with Google</button>
+            <div className={style.signGoogle}>
+                <img style={{width:"10vw", margin:"5%"}} src={google_icon}/>
+                <button className="buttons" onClick={handleClick}>Login with Google</button>
             </div>
         )
     }
@@ -46,7 +51,7 @@ function LoginView (){
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleOnUserNotLoggedIn}
         onUserNotRegistered={handleOnUserNotRegistered}>
-            <div>Loading...</div>
+            <h2 style={{textAlign:"center"}}> Loading...</h2>
         </AuthProvider>
 }
 export default LoginView

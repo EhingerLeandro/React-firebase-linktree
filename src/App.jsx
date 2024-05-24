@@ -1,39 +1,30 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import {Link} from "react-router-dom";
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import logo from "./images/pic_link_tree.png"
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
+
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-      <div>{import.meta.env.VITE_APP_SALUDO}</div>
+    <div style={{display:"flex", flexDirection:"column", alignItems:"center" }}>
+      <img style={{width:"10vw", marginTop:"5vh"}}src={logo}/>
+      <h1>Tree Link App</h1>
+      <section style={{display:"flex", flexDirection:"column", alignItems:"center" }}>
+        <div style={{marginBottom:"10px"}}>{import.meta.env.VITE_APP_SALUDO}</div>
         <Link to="/login">
-          <button>
-            Login View
+          <button className="buttons">
+            Continue
           </button>
         </Link>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </section>
+      <section className="sectionButtons">
+          <Link to="/u/tecnoboy"><button className="otherBut">Example One</button></Link>
+          <Link to="/u/leoncio"><button className="otherBut">Example Two</button></Link>
+          <Link to="/u/ehinger"><button className="otherBut">Example Three</button></Link>
+      </section>
+    </div>
   )
 }
 

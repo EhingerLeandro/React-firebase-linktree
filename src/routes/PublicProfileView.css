@@ -1,0 +1,24 @@
+.publicContainer{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.containProfile{
+    margin-top: 5vh;
+}
+
+.buttons{
+    border-radius:5px;
+    color:#fff;
+    background-color: #6968be;
+    border:none;
+    cursor: pointer;
+  }
+
+  .linkSection{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+  }
+

@@ -3,13 +3,16 @@ import {useNavigate, Link} from "react-router-dom";
 import {useState} from "react";
 import {existsUsername} from "../firebase/firebase";
 import {updateUser} from "../firebase/firebase";
+import "../index.css";
+import "../App.css";
 
 /*Estados predefinidos
 2: login completo
 3: Login pero sin registro
 4: No estas logueado
 5: Ya existe username
-6: Nuevo username, click para continuar */
+6: Nuevo username, click para continuar 
+7: User doesn't exist */
 
 const ChooseUserView = () =>{
     const navigate = useNavigate();
@@ -17,10 +20,10 @@ const ChooseUserView = () =>{
     const [currentUser, setCurrentUser] = useState({});
     const [inputUsername, setInputUsername] = useState("");
 
-    function handleUserLoggedIn(user){
+    function handleUserLoggedIn(){
         navigate("/dashboard");
     }
-    function handleOnUserNotLoggedIn(user){
+    function handleOnUserNotLoggedIn(){
         navigate("/login");
     }
     function handleOnUserNotRegistered(user){
@@ -50,15 +53,16 @@ const ChooseUserView = () =>{
  
     if(currentState === 3 || currentState===5){
         return(
-            <div>
+            <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                <h2>Bienvenido {currentUser.displayName}</h2>
                 <div>Estas logueado pero no registrado. Tu cuenta google: &apos;{currentUser.displayName}&apos;</div>
-                <p>Para terminar el proceso escoger un nombre de usuario</p>
+                <p>Para terminar el proceso, escoge un nombre de usuario</p>
                 {currentState===5? <p style={{color:"red"}}>El nombre de usuario ya existe, escoge otro</p>:""}
                 <div style={{marginBottom:"10px"}}>
                     <input type="text" onInput={handleInputUsername}/>
                 </div>
                 <div>
-                    <button onClick={handleContinue}>Continue</button>
+                    <button className="buttons" onClick={handleContinue}>Continue</button>
                 </div>
             </div>
         )
@@ -66,9 +70,9 @@ const ChooseUserView = () =>{
 
     if(currentState===6){
         return(
-            <div>
-                <h2>Felicidades ya puedes ir a tu perfil a crear tus links</h2>
-                <Link to="/dashboard">Continuar</Link>
+            <div className="containContinue">
+                <h2>Felicidades ya puedes crear tus links</h2>
+                <Link to="/dashboard"><button className="buttons">Continuar</button></Link>
             </div>
         )
     }

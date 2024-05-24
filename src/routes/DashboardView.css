@@ -1,0 +1,18 @@
+.buttons {
+    border-radius:5px;
+    color:#fff;
+    background-color: #6968be;
+  }
+
+.labelInput{
+    margin:5px 5px;
+}
+
+.fullWidth{
+  width:95%;
+}
+
+.form{
+  display:flex;
+  flex-direction:column;
+}

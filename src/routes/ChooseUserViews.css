@@ -1,0 +1,11 @@
+.buttons{
+    border-radius:5px;
+    color:#fff;
+    background-color: #6968be;
+  }
+
+  .containContinue{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }

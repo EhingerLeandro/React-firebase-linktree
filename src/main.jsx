@@ -10,6 +10,14 @@ import SignOutView from "./routes/SignOutView.jsx";
 import PublicProfileView from "./routes/PublicProfileView.jsx";
 import ChooseUserView from "./routes/ChooseUserView.jsx";
 
+/*Estados predefinidos
+2: login completo
+3: Login pero sin registro
+4: No estas logueado
+5: Ya existe username
+6: Nuevo username, click para continuar 
+7: User doesn't exist */
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
@@ -17,7 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path="/login" element={<LoginView/>}/>
       <Route path="/dashboard" element={<DashboardView/>}/>
       <Route path="/dashboard/profile" element={<EditProfileView/>}/>
-      <Route path="signout" element={<SignOutView/>}/>
+      <Route path="/signout" element={<SignOutView/>}/>
       <Route path="u/:username" element={<PublicProfileView/>}/>
       <Route path="/choose-username" element={<ChooseUserView/>}/>
     </Routes>

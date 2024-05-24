@@ -38,8 +38,13 @@ export function LinkComp({docId, title, url, onDelete, onUpdate}){
         setEditTitle(false);
         onUpdate(docId, currentTitle, currentUrl);}
    function handleUrlBlur(){
+        let recentURL;
+        if (!/^https?:\/\//i.test(currentUrl)) {
+                recentURL = `https://${currentUrl}` 
+                setCurrentUrl(recentURL);
+        }
         setEditUrl(false);
-        onUpdate(docId, currentTitle, currentUrl);}
+        onUpdate(docId, currentTitle, recentURL);}
     
     function handleDelete(){
         onDelete(docId);
@@ -47,24 +52,24 @@ export function LinkComp({docId, title, url, onDelete, onUpdate}){
 
     return(
         <div key={docId} id="card-link"> 
-            <div>
+            <div >
                 {editTitle?
-                <input ref={titleRef} type="text" 
+                <input ref={titleRef} type="text" className="labelInput"
                 value={currentTitle} onChange={handleChangeTitle}
                 onBlur={handleTitleBlur}/>:
-                <><button onClick={handleEditTitle}>Edit Title</button>{currentTitle}</>
+                <><button className="labelInput buttons" onClick={handleEditTitle}>Edit Title</button>{currentTitle}</>
                 }
             </div>
-            <div>
+            <div >
                 {editUrl?
-                <input ref={urlRef} type="text" 
+                <input ref={urlRef} type="text" className="labelInput" 
                 value={currentUrl} onChange={handleChangeUrl} 
                 onBlur={handleUrlBlur}/>:
-                <><button onClick={handleEditUrl}>Edit Url</button>
-                <a href={url}>{currentUrl}</a> </>
+                <><button className="labelInput buttons" onClick={handleEditUrl}>Edit Url</button>
+                <a target={"blank"} href={currentUrl}>{currentUrl}</a> </>
                 } 
             </div>
-            <button onClick={handleDelete}>Delete</button>
+            <button className="labelInput buttons" onClick={handleDelete}>Delete</button>
         </div>
     )
 }
