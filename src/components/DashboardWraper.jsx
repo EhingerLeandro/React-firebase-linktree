@@ -9,7 +9,7 @@ export function DashboardWrapper ({children}){
             <div className="outLikeNavbar">
                 <div className="likeNavbar">
                     <Link to="/">
-                        <img style={{height:"15vh", margin:"5px 0px 5px 0px"}} src={logo}/>
+                        <img className="logo" src={logo}/>
                     </Link>
                     <Link className="links" to="/dashboard">Links</Link>
                     <Link className="links" to="/dashboard/profile">Profile</Link>
